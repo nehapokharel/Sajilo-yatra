@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block body %}
+        <section class="container">
+          <div class="for-seo">
+            <!-- <h1 class="entry-title">Company Profile</h1> -->
+          </div>
+    <br>
+            <!-- Search form -->
+            <form action="{% url 'event_list' %}">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="location">
+            <button type="submit"><i class="fa fa-search">Search</i></button>
+            </form>
+            <br>
+            <h3>Events List </h3>
+            <br>
+            <div>
+                <a class="btn btn-outline-dark" href="{% url 'event_create' %}" role="button">Add Events</a>
+            <br>
+
+            </div>
+
+            <div>
+            <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">location</th>
+      <th scope="col">event_name</th>
+      <th scope="col">description</th>
+      <th scope="col">month</th>
+      <th scope="col">date_created</th>
+      <th scope="col" colspan="2">edit</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+       {% for event in event_list %}
+    <tr>
+      <td>{{event.location}}</td>
+      <td>{{event.event_name}}</td>
+      <td>{{event.description}}</td>
+      <td>{{event.month}}</td>
+      <td>{{event.date_created}}</td>
+      <td><a class="btn btn-outline-dark" href="{% url 'event_update' event.pk %}" role="button">Update Events</a></td>
+      <td><a class="btn btn-outline-dark" href="{% url 'event_completion' event.pk %}" role="button">Completed</a></td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+            </div>
+        </section>
+
+{% endblock %}

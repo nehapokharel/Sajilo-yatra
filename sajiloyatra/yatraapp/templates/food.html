@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<section class="home-slider owl-carousel">
+      <div class="slider-item" data-stellar-background-ratio="0.5">  <img src="{% static 'images/foodmain.jpg' %}" >
+        <div class="carousel-caption ">
+          <h3 style="color:#ecf0f1; font-size:80px; font-weight:1000;">Local Foods</h3>
+        </div>
+        <!--- <div class="overlay">
+         <img src="{% static 'images/foodmain.jpg' %}" >
+        </div> ----->
+        <div class="container">
+          <div class="row slider-text align-items-center">
+            <div class="col-md-7 col-sm-12 ftco-animate">
+              <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Tour</span></p>
+              <h1 class="mb-3">Local Food</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              {% for foodItem in food %}
+              <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
+                <a href="#" class="block-5" > <img src="{{ foodItem.food_image_url }}">
+                  <div class="text">
+                    <span class="price">{{ foodItem.location }}</span>
+                    <h3 class="heading">{{ foodItem.food_name }} </h3>
+                    <div class="post-meta">
+                      <span>{{ foodItem.description }}</span>
+                    </div>
+                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+
+
+
+
+
+            </div>
+            <div class="row mt-5">
+              <div class="col text-center">
+                <div class="block-27">
+                  {% if food.has_other_pages %}
+                    <ul class="pagination">
+                  {% if food.has_previous %}
+                    <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                  {% endif %}
+                  {% for i in food.paginator.page_range %}
+                    {% if food.number == i %}
+                      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                      <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if food.has_next %}
+                    <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                  {% endif %}
+                </ul>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END -->
+
+          <div class="col-lg-4 sidebar">
+            <div class="sidebar-box ftco-animate">
+              <div class="search-tours bg-light p-4">
+                <h3>Find your food</h3>
+                <form action="{% url 'food' %}" method="post">
+                  {% csrf_token %}
+                  <div class="fields">
+                    <div class="row flex-column">
+
+                      <div class="textfield-search col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Search Location" name="place"></div>
+
+                      <div class="check-in col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Check-in date" name="check_in"></div>
+
+                      <div class="check-out col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Check-out date" name="check_out"></div>
+                      <div class="select-wrap col-sm-12 group mb-3">
+                      </div>
+                      <div class="col-sm-12 group mb-3">
+                        <input type="submit" class="search-submit btn btn-primary" value="Find Foods">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>Categories</h3>
+                <li><a href="{% url 'food' %}?category=breakfast ">Breakfast </a></li>
+                <li><a href="{% url 'food' %}?category=lunch">Lunch </a></li>
+                <li><a href="{% url 'food' %}?category=dinner">Dinner </a></li>
+                <li><a href="{% url 'food' %}?category=snacks">Snacks </a></li>
+                <li><a href="{% url 'food' %}?category=deserts">Deserts </a></li>
+              </div>
+            </div>
+
+            <div class="sidebar-box ftco-animate">
+              <h3>Nepali Local Food</h3>
+              <p>Nepalese cuisine comprises a variety of cuisines based upon ethnicity, soil and climate relating to Nepal's cultural diversity and geography.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

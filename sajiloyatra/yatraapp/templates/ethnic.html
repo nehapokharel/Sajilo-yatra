@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              {% for festivalItem in festival %}
+              <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
+                <a href="#" class="block-5">
+                	<img src="{{ festivalItem.festival_image_url }}" >
+                  <div class="text">
+                   <span class="price">{{ festivalItem.location}}</span>
+                   <h3 class="heading">{{ festivalItem.festival_name}}</h3>
+                    <div class="post-meta">
+                      <span>{{ festivalItem.description}}</span>
+
+                    </div>
+                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+
+              </div>
+            <div class="row mt-5">
+              <div class="col text-center">
+                <div class="block-27">
+                  {% if festival.has_other_pages %}
+                    <ul class="pagination">
+                  {% if festival.has_previous %}
+                    <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                  {% endif %}
+                  {% for i in festival.paginator.page_range %}
+                    {% if festival.number == i %}
+                      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                      <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if festival.has_next %}
+                    <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                  {% endif %}
+                </ul>
+                  {% endif %}
+                  <!----<ul>
+                    <li><a href="#">&lt;</a></li>
+                    <li class="active"><span>1</span></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&gt;</a></li>
+                  </ul> --->
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

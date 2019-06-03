@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              {% for foodItem in breakfast %}
+              <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
+                <a href="#" class="block-5" > <img src="{{ foodItem.food_image_url }}">
+                  <div class="text">
+                    <span class="price">{{ foodItem.location }}</span>
+                    <h3 class="heading">{{ foodItem.food_name }} </h3>
+                    <div class="post-meta">
+                      <span>{{ foodItem.description }}</span>
+                    </div>
+                    <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span> <span>500 reviews</span></p>
+                  </div>
+                </a>
+              </div>
+            </div>
+              {% endfor %}
+
+            <div class="row mt-5">
+              <div class="col text-center">
+                <div class="block-27">
+                  {% if food.has_other_pages %}
+                    <ul class="pagination">
+                  {% if food.has_previous %}
+                    <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                  {% endif %}
+                  {% for i in food.paginator.page_range %}
+                    {% if food.number == i %}
+                      <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                      <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                  {% if food.has_next %}
+                    <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                  {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                  {% endif %}
+                </ul>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+          <!-- END -->
+
+
+    </section>
+
+{% endblock %}
