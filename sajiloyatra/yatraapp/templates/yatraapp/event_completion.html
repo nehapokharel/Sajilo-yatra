@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<form action=" {% url 'event_list_completed' %}" >
+  {% csrf_token %}
+<div class="container">
+  <h2>Events </h2>
+  <p>The events are listed which happened and is inactive</p>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>location</th>
+        <th>event_name</th>
+        <th>description</th>
+        <th>month</th>
+        <th>date_created</th>
+      </tr>
+    </thead>
+    <tbody>
+   {% for event in object_list %}
+    <tr>
+      <td>{{event.location}}</td>
+      <td>{{event.event_name}}</td>
+      <td>{{event.description}}</td>
+      <td>{{event.month}}</td>
+      <td>{{event.date_created}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</form>
+
+{% endblock %}

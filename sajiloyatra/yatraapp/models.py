@@ -30,14 +30,24 @@ class Festival(models.Model):
     checkin = models.DateField(default=timezone.now)
     checkout = models.DateField(default=timezone.now)
 
-
-
     def __str__(self):
         return self.festival_name
 
+
 class EventManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(active = True)
+        return super().get_queryset().filter(active=True)
+
+
+class CompletedEvents(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(active=False)
+
+
+class EventVerification(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(verified=False)
+
 
 
 class Event(models.Model):
@@ -48,4 +58,27 @@ class Event(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
     objects = EventManager()
+    completed_objects = CompletedEvents()
+    is_verified = models.BooleanField(default=False)
 
+
+
+class EventCompletion(models.Model):
+    location = models.CharField(max_length=50, null=True)
+    event_name = models.CharField(max_length=50, null=True)
+    description = models.CharField(max_length=200, null=True)
+    month = models.CharField(max_length=60, null=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    active = models.BooleanField(default=True)
+    objects = EventManager()
+    is_verified = models.BooleanField(default=False)
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100, null=False)
+    email = models.CharField(max_length=100, null=False)
+    subject = models.CharField(max_length=50, null=False)
+    message = models.CharField(max_length=200, null=False)
+
+    def __str__(self):
+        return self.name

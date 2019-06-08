@@ -19,13 +19,15 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('home/', views.homeview, name='home'),
+    path('', views.homeview, name='home'),
     path('food/', views.foodview, name='food'),
-    path('food/category/',views.categoryview, name='category'),
+    path('food/category/', views.categoryview, name='category'),
     path('festival/', views.festivalview, name='festival'),
-    path('events/',views.EventView.as_view(),name='event_list'),
-    path('events/add/',views.EventCreateView.as_view(),name='event_create'),
-    path('events/update/<int:pk>',views.EventUpdateView.as_view(),name= 'event_update'),
-    path('events/completion/<int:pk>',views.eventcompletion ,name = 'event_completion'),
+    path('events/', views.EventView.as_view(), name='event_list'),
+    path('events/completed/', views.EventCompleted.as_view(), name='event_list_completed'),
+    path('events/add/', views.EventCreateView.as_view(), name='event_create'),
+    path('events/update/<int:pk>', views.EventUpdateView.as_view(), name='event_update'),
+    path('events/completion/<int:pk>', views.eventcompletion, name='event_completion'),
     path('contact/', views.contactview, name='contact'),
+    path('thanks/',views.thankview, name='thanks'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
