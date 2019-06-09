@@ -29,6 +29,7 @@
             <div class="row">
               {% for foodItem in food %}
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
+                <button class="btn"><i class="fa fa-plus"></i> Add to Planner</button>
                 <a href="#" class="block-5" > <img src="{{ foodItem.food_image_url }}">
                   <div class="text">
                     <span class="price">{{ foodItem.location }}</span>

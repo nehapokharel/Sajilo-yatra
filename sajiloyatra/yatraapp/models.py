@@ -1,5 +1,8 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericForeignKey
+from users.models import Profile
 
 
 class Food(models.Model):
@@ -81,3 +84,15 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Planner(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+
+
+
+
