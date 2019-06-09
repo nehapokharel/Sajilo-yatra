@@ -44,10 +44,9 @@ class CompletedEvents(models.Manager):
         return super().get_queryset().filter(active=False)
 
 
-class EventVerification(models.Manager):
+class EventVerified(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(verified=False)
-
+        return super().get_queryset().filter(is_verified=True)
 
 
 class Event(models.Model):
@@ -57,10 +56,10 @@ class Event(models.Model):
     month = models.CharField(max_length=60, null=True)
     date_created = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)
     objects = EventManager()
     completed_objects = CompletedEvents()
-    is_verified = models.BooleanField(default=False)
-
+    verified = EventVerified()
 
 
 class EventCompletion(models.Model):

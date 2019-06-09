@@ -7,6 +7,7 @@ from .mixin import SuperUserMixin
 from .forms import EventForm
 from .models import Food, Festival, Event
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @login_required
@@ -113,7 +114,7 @@ def thankview(request):
 
 
 # @login_required
-class EventView(SuperUserMixin, ListView):
+class EventView(ListView,LoginRequiredMixin):
     model = Event
 
     def get_context_data(self, **kwargs):
@@ -122,7 +123,7 @@ class EventView(SuperUserMixin, ListView):
         return context
 
     def get_queryset(self):
-        events = Event.objects.all()
+        events = Event.verified.all()
         location = self.request.GET.get('location')
         if location:
             events = events.filter(location=location)
@@ -177,8 +178,6 @@ class EventCompleted(EventView):
 
 
 
-
-class EventVerified(EventView,SuperUserMixin):
 
 
 
