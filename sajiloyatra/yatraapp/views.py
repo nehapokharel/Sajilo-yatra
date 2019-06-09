@@ -24,22 +24,26 @@ def foodview(request):
     cate = request.POST.get('cate')
     print(cate)
 
-    foods = Food.objects.all()
+    food = Food.objects.all()
 
     if place:
-        foods = foods.filter(location=place)
+        food = food.filter(location=place)
 
     if check_in:
-        foods = foods.filter(checkin=check_in)
+        food = food.filter(checkin=check_in)
 
     if check_out:
-        foods = foods.filter(checkout=check_out)
+        food = food.filter(checkout=check_out)
 
     if cate:
-        foods = foods.filter(category=cate)
+        food = food.filter(category=cate)
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(foods, 6)
+    category = request.GET.get('category')
+    if category:
+        food = food.filter(category=category)
+
+    paginator = Paginator(food, 6)
     try:
         food = paginator.page(page)
     except PageNotAnInteger:
@@ -177,7 +181,7 @@ class EventCompleted(EventView):
         return Event.completed_objects.all()
 
 
-
+#class PlannerView()
 
 
 
