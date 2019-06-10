@@ -30,4 +30,6 @@ urlpatterns = [
     path('events/completion/<int:pk>', views.eventcompletion, name='event_completion'),
     path('contact/', views.contactview, name='contact'),
     path('thanks/',views.thankview, name='thanks'),
+    path('planner',views.PlannerView.as_view(),name='planner'),
+    path('planner/add/<slug:models>/<int:pk>', views.plannerAdded, name='add_planner'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

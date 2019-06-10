@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body %}
+        <section class="container">
+          <div class="for-seo">
+            <!-- <h1 class="entry-title">Company Profile</h1> -->
+          </div>
+    <br>
+            <!-- Search form -->
+
+            <br>
+            <h3>Planner List </h3>
+            <br>
+            <div>
+            <table class="table">
+  <thead>
+<tr>
+    <td> Item</td>
+</tr>
+  </thead>
+  <tbody>
+  {% for planner in object_list %}
+
+    <tr>
+      <th>{{planner.content_object}}<th>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+            </div>
+        </section>
+
+{% endblock %}

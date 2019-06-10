@@ -2,17 +2,16 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericForeignKey
-from users.models import Profile
+from django.contrib.auth.models import User
 
 
 class Food(models.Model):
-    food_image_url = models.CharField(max_length=600, null=True)
-    location = models.CharField(max_length = 50, null=True)
-    food_name = models.CharField(max_length = 50, null=True)
+    food_image_url = models.CharField(max_length=600)
+    location = models.CharField(max_length=50)
+    food_name = models.CharField(max_length = 50)
     description = models.CharField(max_length = 200, null=True)
-    category = models.CharField(max_length = 500, null=True)
-    checkin = models.DateField(default=timezone.now)
-    checkout = models.DateField(default=timezone.now)
+    category = models.CharField(max_length = 500)
+    month = models.CharField(max_length=70)
 
     def __str__(self):
         return self.food_name
@@ -24,14 +23,12 @@ class Food(models.Model):
 
 
 class Festival(models.Model):
-    festival_image_url = models.CharField(max_length=600, null=True)
-    location = models.CharField(max_length=50, null=True)
-    festival_name = models.CharField(max_length=50, null=True)
+    festival_image_url = models.CharField(max_length=600)
+    location = models.CharField(max_length=50)
+    festival_name = models.CharField(max_length=50)
     description = models.CharField(max_length=200, null=True)
-    ethinic = models.CharField(max_length=100, null=True)
-    month = models.CharField(max_length = 60, null=True)
-    checkin = models.DateField(default=timezone.now)
-    checkout = models.DateField(default=timezone.now)
+    ethinic = models.CharField(max_length=100)
+    month = models.CharField(max_length=60)
 
     def __str__(self):
         return self.festival_name
@@ -90,7 +87,7 @@ class Planner(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 

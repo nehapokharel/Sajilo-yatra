@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect
 from django.template import context
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from requests import request
+
 from .mixin import SuperUserMixin
 from .forms import EventForm
-from .models import Food, Festival, Event
+from .models import Food, Festival, Event, Planner
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -181,7 +184,21 @@ class EventCompleted(EventView):
         return Event.completed_objects.all()
 
 
-#class PlannerView()
+class PlannerView(ListView):
+    model = Planner
+
+
+def plannerAdded(request, models, pk):
+    c = ContentType.objects.get(app_label='yatraapp', model=models)
+    p = Planner(content_type=c, object_id=pk, user=request.user)
+    p.save()
+    object_list = Planner.objects.filter(user=request.user)
+
+    return render(request, 'yatraapp/planner_list.html', {'object_list': object_list})
+
+
+
+
 
 
 
