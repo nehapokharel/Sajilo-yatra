@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Food, Festival, Event, EventCompletion, Contact, Planner
+from .models import Food, Festival, Event, EventCompletion, Contact, Planner, FoodReview, FestivalReview
 
 admin.site.register(Food)
 
@@ -12,3 +12,7 @@ admin.site.register(EventCompletion)
 admin.site.register(Contact)
 
 admin.site.register(Planner)
+
+admin.site.register(FoodReview)
+
+admin.site.register(FestivalReview)

@@ -91,5 +91,21 @@ class Planner(models.Model):
 
 
 
+class FoodReview(models.Model):
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    reviewer = models.CharField(max_length=500)
+    review = models.TextField()
+
+    def __str__(self):
+        return self.reviewer
+
+class FestivalReview(models.Model):
+    festival = models.ForeignKey(Festival, on_delete=models.CASCADE)
+    reviewer = models.CharField(max_length=500)
+    review = models.TextField()
+
+    def __str__(self):
+        return self.reviewer
+
 
 

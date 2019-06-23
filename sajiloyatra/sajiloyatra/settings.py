@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'yatraapp',
     'users',
     'crispy_forms',
+    'social_django'
 ]
 
 MIDDLEWARE = [

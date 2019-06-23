@@ -153,13 +153,13 @@ class EventCreateView(CreateView):
     success_url = reverse_lazy('event_list')
 
 
+
+
 class EventUpdateView(UpdateView):
     model = Event
     fields = ['location','event_name', 'description', 'month', 'date_created']
     template_name_suffix = '_form'
     success_url = reverse_lazy('event_list')
-
-
 #def eventcompletion(request, pk):
         #event = Event.objects.get(pk=pk)
         #event.active = False
