@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+				<iframe src="https://calendar.google.com/calendar/embed?src=en.np%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKathmandu" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+
+            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0"style="width:100% float:right;">
+              <thead>
+                <tr>
+                  <th>Items</th>
+                  <th>Month</th>
+         
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+              
+                 <th>Items</th>
+                  <th>Month</th>
+  
+               </tr>
+             </tfoot>
+             <tbody>
+               {% for planner in object_list %}
+               <tr>
+                <td>{{planner.content_object}}</td>
+                <td>{{planner.content_object.month}}</td>
+                
+                
+                    
+
+                   
+                   
+                 </div>
+
+               </td>
+             </tr>
+             {% endfor %}
+             
+           </tbody>
+         </table>
+ 
+
+{% endblock %}
+		
+
+

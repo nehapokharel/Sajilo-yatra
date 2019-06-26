@@ -32,7 +32,7 @@
             <div class="row">
               {% for festivalItem in festival %}
               <div class="col-md-6 col-lg-6 mb-4 ftco-animate">
-                <a href="#" class="block-5">
+                <a href="{% url 'add_planner' 'festival' festivalItem.id %}" class="block-5">
                 	<img src="{{ festivalItem.festival_image_url }}" >
                   <div class="text">
                    <span class="price">{{ festivalItem.location}}</span>
@@ -159,25 +159,16 @@
             <div class="sidebar-box ftco-animate">
               <div class="search-tours bg-light p-4">
                 <h3>Find your tour</h3>
-                <form action="" method="post">
+                <form action="{% url 'festival' %}" method="post">
+                  {% csrf_token %}
                   <div class="fields">
                     <div class="row flex-column">
 
-                      <div class="textfield-search col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Search Location"></div>
+                      <div class="textfield-search col-sm-12 group mb-3"><input type="text" class="form-control" placeholder="Search Location" name="location"></div>
 
-                      <div class="check-in col-sm-12 group mb-3"><input type="text" id="checkin_date" class="form-control" placeholder="Check-in date"></div>
+                      <div class="check-in col-sm-12 group mb-3"><input type="text"  class="form-control" placeholder="Month" name='time'></div>
 
-                      <div class="check-out col-sm-12 group mb-3"><input type="text" id="checkout_date" class="form-control" placeholder="Check-out date"></div>
-                      <div class="select-wrap col-sm-12 group mb-3">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">Month</option>
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4+</option>
-                        </select>
-                      </div>
+                     
                       <div class="col-sm-12 group mb-3">
                         <input type="submit" class="search-submit btn btn-primary" value="Find Festivals">
                       </div>

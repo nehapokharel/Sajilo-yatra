@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'yatraapp',
     'users',
     'crispy_forms',
+    'import_export',
     'social_django'
 ]
 

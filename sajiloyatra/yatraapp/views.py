@@ -5,6 +5,8 @@ from django.template import context
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from requests import request
+from django.views.generic import *
+from django.views.generic.edit import *
 
 from .mixin import SuperUserMixin
 from .forms import EventForm
@@ -64,27 +66,16 @@ def categoryview(request):
 def festivalview(request):
     festival = Festival.objects.all()
 
-    #place = request.POST.get('location')
+    place = request.POST.get('location')
 
-    #checkin = request.POST.get('checkin')
 
-    #checkout = request.POST.get('checkout')
+    time = request.POST.get('month')
 
-    #month = request.Post.get('month')
+    if place:
+       festival = festival.filter(location=place)
 
-    #festival = Festival.objects.all()
-
-    #if place:
-     #   festival = festival.filter(location=place)
-
- #   if checkin:
-  #      festival = festival.filter(checkin=checkin)
-
-   # if checkout:
-    #    festival = festival.filter(checkout=checkout)
-
-    #if month:
-     #   festival = festival.filter(category=month)
+    if time:
+       festival = festival.filter(month=time)
 
     page = request.GET.get('page', 1)
     paginator = Paginator(festival, 6)
@@ -184,8 +175,10 @@ class EventCompleted(EventView):
         return Event.completed_objects.all()
 
 
+
 class PlannerView(ListView):
     model = Planner
+    template_name = 'yatraapp/planner.html'
 
 
 def plannerAdded(request, models, pk):
